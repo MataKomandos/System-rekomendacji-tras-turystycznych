@@ -1,0 +1,16 @@
+id,nazwa,region,dlugosc_km,czas_przejscia,trudnosc,przewyzszenie_m,punkt_startowy,punkt_koncowy,opis,kategoria
+1,Dolina Pięciu Stawów,Tatry,10.5,4h30min,3.5,850,Palenica Białczańska,Schronisko w Dolinie Pięciu Stawów,Malownicza trasa prowadząca przez dolinę z pięcioma stawami wysokogórskimi,Górska
+2,Szlak na Giewont,Tatry,7.2,3h45min,4.0,920,Kuźnice,Szczyt Giewontu,Popularna trasa na charakterystyczny szczyt z krzyżem,Górska
+3,Droga na Morskie Oko,Tatry,8.0,2h30min,2.0,400,Palenica Białczańska,Morskie Oko,Łatwa trasa do największego tatrzańskiego jeziora,Górska
+4,Szlak na Śnieżkę,Karkonosze,15.0,6h00min,3.5,1000,Karpacz,Śnieżka,Trasa na najwyższy szczyt Karkonoszy,Górska
+5,Szlak Orlich Gniazd,Jura Krakowsko-Częstochowska,12.5,4h00min,2.5,300,Olsztyn,Mirów,Malownicza trasa przez ruiny zamków,Nizinna
+6,Główny Szlak Beskidzki,Beskidy,18.0,7h00min,3.0,750,Ustroń,Wisła,Fragment popularnego szlaku długodystansowego,Górska
+7,Szlak na Turbacz,Gorce,8.5,3h30min,2.5,600,Nowy Targ,Turbacz,Trasa przez malownicze polany gorczańskie,Górska
+8,Szlak na Tarnicę,Bieszczady,16.0,6h30min,3.5,850,Wołosate,Tarnica,Trasa na najwyższy szczyt Bieszczad,Górska
+9,Droga przez Diablak,Beskidy,14.0,5h00min,3.0,700,Markowe Szczawiny,Diablak,Trasa przez Babią Górę,Górska
+10,Szlak Wąwóz Homole,Pieniny,6.0,2h00min,1.5,200,Jaworki,Wąwóz Homole,Łatwa trasa przez malowniczy wąwóz,Nizinna
+11,"Ścieżka wokół jeziora Solińskiego","Bieszczady",15.5,"5h",2,150,"Solina","Solina","Malownicza trasa wokół największego sztucznego jeziora w Polsce.","lakeside"
+12,"Ścieżka Długosza","Pieniny",10.0,"3h",3,200,"Szczawnica","Sokolica","Trasa nazwana na cześć endemicznego gatunku paproci.","forest"
+13,"Szlak na Ślężę","Sudety",9.4,"3h",3,550,"Sobótka","Ślęża","Trasa na charakterystyczny szczyt Przedgórza Sudeckiego.","mountain"
+14,"Trasa pielgrzymkowa do Kalwarii Pacławskiej","Podkarpacie",18.7,"6h",2,260,"Przemyśl","Kalwaria Pacławska","Historyczna trasa pielgrzymkowa.","religious"
+15,"Błędne Skały","Góry Stołowe",4.0,"1h 30min",2,150,"Parking Błędne Skały","Błędne Skały","Fascynujący labirynt skalny z wąskimi przejściami i pięknymi formacjami skalnymi.","rock"
