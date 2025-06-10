@@ -1,0 +1,157 @@
+[
+  {
+    "id": 1,
+    "nazwa": "Dolina Kościeliska",
+    "region": "Tatry",
+    "dlugosc_km": 8.5,
+    "czas_przejscia": "3h 10min",
+    "trudnosc": "łatwa",
+    "przewyzszenie_m": 380,
+    "czas_h": 3.11,
+    "komfort": 98.2,
+    "kategorie": [
+      "Rodzinne",
+      "Widokowe"
+    ],
+    "opis": "Malownicza dolina w Tatrach Zachodnich, idealna na rodzinne wycieczki. Trasa prowadzi wzdłuż potoku Kościeliskiego, mijając liczne jaskinie i formacje skalne."
+  },
+  {
+    "id": 3,
+    "nazwa": "Szlak do Morskiego Oka",
+    "region": "Tatry",
+    "dlugosc_km": 9.0,
+    "czas_przejscia": "3h 40min",
+    "trudnosc": "łatwa",
+    "przewyzszenie_m": 400,
+    "czas_h": 3.69,
+    "komfort": 98.2,
+    "kategorie": [
+      "Rodzinne",
+      "Widokowe"
+    ],
+    "opis": "Najpopularniejszy szlak w Tatrach prowadzący do największego tatrzańskiego jeziora. Asfaltowa droga czyni go dostępnym dla każdego."
+  },
+  {
+    "id": 4,
+    "nazwa": "Ścieżka Długosza",
+    "region": "Pieniny",
+    "dlugosc_km": 7.2,
+    "czas_przejscia": "2h 50min",
+    "trudnosc": "średnia",
+    "przewyzszenie_m": 320,
+    "czas_h": 2.83,
+    "komfort": 94.7,
+    "kategorie": [
+      "Rodzinne"
+    ],
+    "opis": "Malownicza trasa w Pieninach, oferująca piękne widoki na Dunajec i okoliczne szczyty."
+  },
+  {
+    "id": 5,
+    "nazwa": "Szlak do Wąwozu Homole",
+    "region": "Pieniny",
+    "dlugosc_km": 3.5,
+    "czas_przejscia": "1h 10min",
+    "trudnosc": "łatwa",
+    "przewyzszenie_m": 150,
+    "czas_h": 1.15,
+    "komfort": 94.7,
+    "kategorie": [
+      "Rodzinne"
+    ],
+    "opis": "Krótka, ale niezwykle malownicza trasa prowadząca przez jeden z najpiękniejszych wąwozów w Polsce."
+  },
+  {
+    "id": 6,
+    "nazwa": "Błędne Skały",
+    "region": "Góry Stołowe",
+    "dlugosc_km": 4.0,
+    "czas_przejscia": "1h 15min",
+    "trudnosc": "łatwa",
+    "przewyzszenie_m": 180,
+    "czas_h": 1.25,
+    "komfort": 91.1,
+    "kategorie": [
+      "Rodzinne"
+    ],
+    "opis": "Fascynujący labirynt skalny w Górach Stołowych. Trasa prowadzi przez wąskie szczeliny i korytarze między skałami."
+  },
+  {
+    "id": 9,
+    "nazwa": "Spacer po Równi Krupowej",
+    "region": "Tatry",
+    "dlugosc_km": 2.8,
+    "czas_przejscia": "1h",
+    "trudnosc": "łatwa",
+    "przewyzszenie_m": 50,
+    "czas_h": 0.96,
+    "komfort": 98.2,
+    "kategorie": [
+      "Rodzinne"
+    ],
+    "opis": "Łatwa trasa spacerowa z pięknymi widokami na panoramę Tatr. Idealna na krótki relaks i fotografowanie gór."
+  },
+  {
+    "id": 15,
+    "nazwa": "Szlak do Zamku Czocha",
+    "region": "Dolny Śląsk",
+    "dlugosc_km": 5.2,
+    "czas_przejscia": "1h 50min",
+    "trudnosc": "łatwa",
+    "przewyzszenie_m": 120,
+    "czas_h": 1.81,
+    "komfort": 93.4,
+    "kategorie": [
+      "Rodzinne"
+    ],
+    "opis": "Malownicza trasa prowadząca do jednego z najpiękniejszych zamków w Polsce. Po drodze piękne widoki na Jezioro Leśniańskie."
+  },
+  {
+    "id": 16,
+    "nazwa": "Ścieżka edukacyjna w Kampinoskim Parku Narodowym",
+    "region": "Mazowieckie",
+    "dlugosc_km": 6.8,
+    "czas_przejscia": "2h 40min",
+    "trudnosc": "łatwa",
+    "przewyzszenie_m": 30,
+    "czas_h": 2.62,
+    "komfort": 85.8,
+    "kategorie": [
+      "Edukacyjne",
+      "Rodzinne"
+    ],
+    "opis": "Trasa edukacyjna prezentująca różnorodność przyrodniczą Puszczy Kampinoskiej. Idealna na rodzinne wycieczki z dziećmi."
+  },
+  {
+    "id": 18,
+    "nazwa": "Trasa nadmorska w Łebie",
+    "region": "Pomorze",
+    "dlugosc_km": 7.5,
+    "czas_przejscia": "3h",
+    "trudnosc": "łatwa",
+    "przewyzszenie_m": 40,
+    "czas_h": 3.02,
+    "komfort": 95.2,
+    "kategorie": [
+      "Nadmorskie",
+      "Rodzinne"
+    ],
+    "opis": "Spacer brzegiem morza i przez wydmy Słowińskiego Parku Narodowego. Trasa oferuje piękne widoki na ruchome wydmy i Morze Bałtyckie."
+  },
+  {
+    "id": 19,
+    "nazwa": "Szlak na Ślężę",
+    "region": "Sudety",
+    "dlugosc_km": 11.2,
+    "czas_przejscia": "4h 20min",
+    "trudnosc": "średnia",
+    "przewyzszenie_m": 520,
+    "czas_h": 4.32,
+    "komfort": 94.1,
+    "kategorie": [
+      "Rodzinne",
+      "Widokowe"
+    ],
+    "opis": "Popularna trasa na szczyt Ślęży - świętej góry Słowian. Z wierzchołka rozciąga się panorama na Przedgórze Sudeckie i Wrocław."
+  }
+]
