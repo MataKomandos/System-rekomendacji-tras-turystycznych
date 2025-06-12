@@ -137,12 +137,11 @@ class PDFReportGenerator:
         elements.append(Spacer(1, 20))
         
         sections = [
-            ("1. Profile wysokościowe tras", "section1"),
-            ("2. Szczegółowe opisy rekomendowanych tras", "section2"),
-            ("3. Analiza porównawcza", "section3"),
-            ("4. Analiza sezonowości", "section4"),
-            ("5. Tabela zbiorcza", "section5"),
-            ("6. Aneks - Dane źródłowe", "section6")
+            ("1. Profile wysokościowe tras", "section1"),           
+            ("2. Analiza porównawcza", "section2"),
+            ("3. Analiza sezonowości", "section3"),
+            ("4. Tabela zbiorcza", "section4"),
+            ("5. Aneks - Dane źródłowe", "section5")
         ]
         
         for title, section in sections:
@@ -190,9 +189,6 @@ class PDFReportGenerator:
                 print("Generowanie profili wysokościowych...")
                 elements.extend(self._create_elevation_profiles_section(routes_data))
                 
-                print("Generowanie szczegółowych opisów tras...")
-                elements.extend(self._create_detailed_routes_section(routes_data))
-                
                 print("Generowanie wykresów porównawczych...")
                 elements.extend(self._create_comparative_charts_section(routes_data))
                 
@@ -216,6 +212,7 @@ class PDFReportGenerator:
         except Exception as e:
             print(f"Błąd podczas generowania raportu: {str(e)}")
             raise
+
     def _create_title_page(self, routes_data: List[Dict[str, Any]], search_params: Dict[str, Any], weather_data: Optional[Dict[str, Any]] = None) -> List[Any]:
         
         elements = []
@@ -306,57 +303,13 @@ class PDFReportGenerator:
         
         return elements
 
-    def _create_detailed_routes_section(self, routes_data: List[Dict[str, Any]]) -> List[Any]:
-
-        elements = []
-        
-        elements.append(Paragraph('<a name="section2"/>2. Szczegółowe opisy rekomendowanych tras', self.styles['CustomHeading1']))
-        elements.append(Spacer(1, 12))
-        
-        for route in routes_data:
-            route_id = route.get('id')
-            if route_id is None:
-                continue
-                            
-            rating = self.rating_manager.get_route_rating(route_id)
-            reviews = self.rating_manager.get_route_reviews(route_id)           
-
-            elements.append(Paragraph(f"{route.get('nazwa', 'Nieznana trasa')}", self.styles['CustomHeading2']))
-            
-            info_text = f"""
-            <b>Region:</b> {route.get('region', 'b/d')}<br/>
-            <b>Długość:</b> {route.get('dlugosc_km', 'b/d')} km<br/>
-            <b>Czas przejścia:</b> {route.get('czas_przejscia', 'b/d')}<br/>
-            <b>Trudność:</b> {route.get('trudnosc', 'b/d')}<br/>
-            <b>Przewyższenie:</b> {route.get('przewyzszenie_m', 'b/d')} m<br/>
-            <b>Średnia ocena:</b> {f'{rating:.1f}/5.0' if rating else 'brak ocen'}<br/>
-            """
-            elements.append(Paragraph(info_text, self.styles['CustomBody']))
-            
-            if route.get('opis'):
-                elements.append(Paragraph("<b>Opis trasy:</b>", self.styles['CustomHeading3']))
-                elements.append(Paragraph(route['opis'], self.styles['CustomBody']))
-            
-            if reviews:
-                elements.append(Paragraph("<b>Opinie użytkowników:</b>", self.styles['CustomHeading3']))
-                for review in reviews:
-                    review_text = f"""
-                    <b>{review['author']}</b> ({review['date']}) - {'★' * review['rating']}<br/>
-                    {review['text']}
-                    """
-                    elements.append(Paragraph(review_text, self.styles['CustomBody']))
-            
-            elements.append(Spacer(1, 20))
-        
-        return elements
-
     def _create_comparative_charts_section(self, routes_data: List[Dict[str, Any]]) -> List[Any]:
         
         elements = []
         chart_gen = ChartGenerator()
         reviews_gen = RouteReviewsGenerator()
         
-        elements.append(Paragraph('<a name="section3"/>3. Analiza porównawcza', 
+        elements.append(Paragraph('<a name="section2"/>2. Analiza porównawcza', 
                                 self.styles['CustomHeading1']))
         elements.append(Spacer(1, 20))
         
@@ -369,17 +322,17 @@ class PDFReportGenerator:
             route_copy['length'] = length
             routes_with_length.append(route_copy)
         
-        elements.append(Paragraph("3.1. Porównanie długości tras", self.styles['CustomHeading2']))
+        elements.append(Paragraph("2.1. Porównanie długości tras", self.styles['CustomHeading2']))
         length_chart = chart_gen.create_route_comparison_chart(routes_with_length, 'length')
         elements.append(Image(length_chart, width=400, height=200))
         elements.append(Spacer(1, 20))
         
-        elements.append(Paragraph("3.2. Rozkład kategorii tras", self.styles['CustomHeading2']))
+        elements.append(Paragraph("2.2. Rozkład kategorii tras", self.styles['CustomHeading2']))
         category_chart = chart_gen.create_route_categories_pie(routes_data)
         elements.append(Image(category_chart, width=400, height=300))
         elements.append(Spacer(1, 20))
         
-        elements.append(Paragraph("3.3. Opinie użytkowników", self.styles['CustomHeading2']))
+        elements.append(Paragraph("2.3. Opinie użytkowników", self.styles['CustomHeading2']))
         
         for i, route in enumerate(routes_data, 1):
             route_data = reviews_gen.get_route_data(route)
@@ -430,7 +383,7 @@ class PDFReportGenerator:
         elements = []
         chart_gen = ChartGenerator()
         
-        elements.append(Paragraph('<a name="section4"/>4. Analiza sezonowości', 
+        elements.append(Paragraph('<a name="section3"/>3. Analiza sezonowości', 
                                 self.styles['CustomHeading1']))
         elements.append(Spacer(1, 12))
         
@@ -492,7 +445,7 @@ class PDFReportGenerator:
         
         elements = []
         
-        elements.append(Paragraph('<a name="section5"/>5. Tabela zbiorcza', 
+        elements.append(Paragraph('<a name="section4"/>4. Tabela zbiorcza', 
                                 self.styles['CustomHeading1']))
         elements.append(Spacer(1, 20))
         
@@ -534,7 +487,7 @@ class PDFReportGenerator:
 
         elements = []
         
-        elements.append(Paragraph('<a name="section6"/>6. Aneks - Źródła danych', 
+        elements.append(Paragraph('<a name="section5"/>5. Aneks - Źródła danych', 
                                 self.styles['CustomHeading1']))
         elements.append(Spacer(1, 20))
         
@@ -545,7 +498,7 @@ class PDFReportGenerator:
         elements.append(Paragraph(intro_text.strip(), self.styles['CustomBody']))
         elements.append(Spacer(1, 20))
         
-        elements.append(Paragraph("6.1. Źródła danych pogodowych", self.styles['CustomHeading2']))
+        elements.append(Paragraph("5.1. Źródła danych pogodowych", self.styles['CustomHeading2']))
         weather_sources = [
             ("Temperatura i opady", "OpenWeatherMap API", "Dane aktualizowane co godzinę"),
             ("Prognoza pogody", "Met.no Weather API", "7-dniowa prognoza pogody"),
@@ -567,7 +520,7 @@ class PDFReportGenerator:
         elements.append(weather_table)
         elements.append(Spacer(1, 20))
         
-        elements.append(Paragraph("6.2. Źródła danych geograficznych", self.styles['CustomHeading2']))
+        elements.append(Paragraph("5.2. Źródła danych geograficznych", self.styles['CustomHeading2']))
         geo_sources = [
             ("Mapy i trasy", "OpenStreetMap", "Dane społecznościowe"),
             ("Profile wysokościowe", "SRTM (NASA)", "Rozdzielczość 30m"),
@@ -590,7 +543,7 @@ class PDFReportGenerator:
         elements.append(geo_table)
         elements.append(Spacer(1, 20))
         
-        elements.append(Paragraph("6.3. Dane o trudności i komforcie tras", self.styles['CustomHeading2']))
+        elements.append(Paragraph("5.3. Dane o trudności i komforcie tras", self.styles['CustomHeading2']))
         rating_text = """
         Oceny trudności i komfortu tras są obliczane na podstawie następujących źródeł:
         • Opinie użytkowników z portali turystycznych
@@ -603,7 +556,7 @@ class PDFReportGenerator:
         elements.append(Paragraph(rating_text.strip(), self.styles['CustomBody']))
         elements.append(Spacer(1, 20))
         
-        elements.append(Paragraph("6.4. Częstotliwość aktualizacji danych", self.styles['CustomHeading2']))
+        elements.append(Paragraph("5.4. Częstotliwość aktualizacji danych", self.styles['CustomHeading2']))
         update_info = [
             ("Dane pogodowe", "Co godzinę"),
             ("Dane geograficzne", "Co miesiąc"),
