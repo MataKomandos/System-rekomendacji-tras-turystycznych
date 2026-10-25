@@ -1,135 +1,67 @@
-# Rekomendator Tras Turystycznych 🏔️
+# Rekomendator tras turystycznych
 
-System rekomendacji tras turystycznych z generowaniem szczegółowych raportów PDF.
+Aplikacja konsolowa, która podpowiada trasy piesze na wybrany dzień. Wybierasz zakres temperatur, długość i trudność trasy oraz region, a program porównuje je z prognozą pogody, ocenia każdą trasę i zapisuje raport PDF z wykresami.
 
-## 📋 Spis treści
-- [Opis projektu](#opis-projektu)
-- [Funkcjonalności](#funkcjonalności)
-- [Wymagania systemowe](#wymagania-systemowe)
-- [Instalacja](#instalacja)
-- [Użytkowanie](#użytkowanie)
-- [Struktura projektu](#struktura-projektu)
-- [Generowane raporty](#generowane-raporty)
-- [Licencja](#licencja)
+## Jak to działa
 
-## 🎯 Opis projektu
+1. Wczytuje trasy z `data/trasy/trasy.csv` (15 tras w 12 regionach) i dane pogodowe z `data/pogoda/pogoda.csv`.
+2. Odrzuca trasy, które nie mieszczą się w limitach długości i trudności.
+3. Dla każdej pozostałej trasy liczy dopasowanie do pogody w jej regionie (temperatura, opady, zachmurzenie) oraz dopasowanie samej trasy (trudność i długość), a następnie łączy je wagami.
+4. Zapisuje raport PDF do katalogu `raporty/`.
 
-Rekomendator Tras Turystycznych to zaawansowany system, który pomaga użytkownikom w wyborze tras turystycznych na podstawie ich preferencji. System analizuje różnorodne dane, w tym warunki pogodowe, trudność tras, opinie użytkowników i generuje szczegółowe raporty w formacie PDF.
+Wszystkie dane pochodzą z plików w repozytorium, więc program nie potrzebuje internetu.
 
-## ✨ Funkcjonalności
+## Raport PDF
 
-- **Rekomendacje tras** na podstawie:
-  - Preferencji użytkownika
-  - Warunków pogodowych
-  - Trudności trasy
-  - Długości trasy
-  - Regionu
-  
-- **Analiza danych**:
-  - Profile wysokościowe tras
-  - Analiza porównawcza tras
-  - Analiza sezonowości
-  - Statystyki i wykresy
+- profile wysokościowe tras,
+- wykresy porównawcze (długość, trudność, kategorie),
+- mapa ciepła dostępności w ciągu roku,
+- tabela zbiorcza,
+- aneks ze źródłami danych i metodą oceny.
 
-- **Generowanie raportów PDF** zawierających:
-  - Profile wysokościowe tras
-  - Analizę porównawczą
-  - Analizę sezonowości
-  - Tabelę zbiorczą
-  - Dane źródłowe
+Raport używa czcionki DejaVu Sans, więc polskie znaki wyświetlają się poprawnie na każdym systemie.
 
-## 💻 Wymagania systemowe
+## Uruchomienie
 
-- Python 3.8 lub nowszy
-- System operacyjny: Windows/Linux/MacOS
-- Minimum 4GB RAM
-- Dostęp do internetu (dla danych pogodowych)
+Wymagany jest Python 3.9 lub nowszy.
 
-## 🚀 Instalacja
-
-1. Sklonuj repozytorium:
 ```bash
-git clone [adres-repozytorium]
-cd mainRekomendator
-```
+git clone https://github.com/MataKomandos/System-rekomendacji-tras-turystycznych.git
+cd System-rekomendacji-tras-turystycznych
 
-2. Utwórz wirtualne środowisko Python:
-```bash
 python -m venv venv
-```
+venv\Scripts\activate            # Linux/macOS: source venv/bin/activate
 
-3. Aktywuj wirtualne środowisko:
-- Windows:
-```bash
-venv\Scripts\activate
-```
-- Linux/MacOS:
-```bash
-source venv/bin/activate
-```
-
-4. Zainstaluj wymagane pakiety:
-```bash
 pip install -r requirements.txt
+python main.py
 ```
 
-## 🎮 Użytkowanie
+Program zapyta o preferencje: minimalną i maksymalną temperaturę, długość trasy, trudność (1-5) i region. Raport trafi do `raporty/`.
 
-1. Uruchom program główny:
+## Testy
+
 ```bash
-python src/main.py
+pip install -r requirements-dev.txt
+pytest
 ```
 
-2. Wprowadź swoje preferencje:
-   - Minimalna/maksymalna temperatura
-   - Minimalna/maksymalna długość trasy
-   - Poziom trudności
-   - Preferowany region
+Testy obejmują indeks komfortu pogody, odrzucanie dni z za dużymi opadami, filtrowanie tras według limitów, sortowanie wyników, pomijanie regionów bez danych pogodowych oraz średnią ocen z recenzji.
 
-3. System wygeneruje raport PDF z rekomendacjami w katalogu `raporty/`
-
-## 📁 Struktura projektu
+## Struktura
 
 ```
-mainRekomendator/
-├── data/                   # Dane wejściowe
-│   ├── maps/              # Mapy tras
-│   ├── pogoda/            # Dane pogodowe
-│   ├── route_reviews/     # Recenzje tras
-│   └── trasy/             # Informacje o trasach
-├── src/                   # Kod źródłowy
-│   ├── analyzers/         # Moduły analizy danych
-│   ├── data_handlers/     # Obsługa danych
-│   ├── interface/         # Interfejs użytkownika
-│   ├── models/            # Modele danych
-│   ├── recommenders/      # System rekomendacji
-│   └── reports/           # Generowanie raportów
-├── raporty/              # Wygenerowane raporty PDF
-├── tests/                # Testy
-└── requirements.txt      # Zależności projektu
+main.py                     punkt wejścia
+data/
+├── trasy/trasy.csv         opis tras
+├── pogoda/pogoda.csv       dane pogodowe
+└── route_reviews/          recenzje tras (HTML)
+src/
+├── models/                 Trasa, DanePogodowe, PreferencjeUzytkownika
+├── recommenders/           ocena i sortowanie tras
+├── analyzers/              analiza pogody i recenzji
+├── data_handlers/          wczytywanie danych, oceny tras
+├── interface/              obsługa konsoli
+└── reports/                wykresy i generator PDF
+tests/                      testy pytest
+raporty/                    wygenerowane raporty (poza gitem)
 ```
-
-## 📊 Generowane raporty
-
-Raporty PDF zawierają:
-
-1. **Profile wysokościowe tras**
-   - Wizualizacje profili wysokościowych
-   - Dane o przewyższeniach
-
-2. **Analiza porównawcza**
-   - Porównanie długości tras
-   - Rozkład kategorii
-   - Opinie użytkowników
-
-3. **Analiza sezonowości**
-   - Mapy ciepła dostępności
-   - Dane pogodowe
-
-4. **Tabela zbiorcza**
-   - Zestawienie wszystkich tras
-   - Kluczowe parametry
-
-5. **Aneks**
-   - Źródła danych
-   - Metodologia

@@ -10,6 +10,7 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 import os
 from typing import List, Dict, Any, Optional
 from datetime import datetime
+import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 from io import BytesIO
@@ -39,20 +40,10 @@ class PDFReportGenerator:
         try:
             from reportlab.pdfbase.ttfonts import TTFError
             try:
-                # Ścieżka do czcionki w systemie Windows
-                windows_font_path = 'C:/Windows/Fonts/DejaVuSans.ttf'
-                # Ścieżka do czcionki w projekcie
-                project_font_path = os.path.join(os.path.dirname(__file__), 'fonts', 'DejaVuSans.ttf')
-                
-                # Próbuj najpierw użyć czcionki systemowej
-                if os.path.exists(windows_font_path):
-                    font_path = windows_font_path
-                # Jeśli nie ma systemowej, użyj czcionki z projektu
-                elif os.path.exists(project_font_path):
-                    font_path = project_font_path
-                else:
+                font_path = self._znajdz_czcionke()
+                if font_path is None:
                     raise TTFError("Nie znaleziono czcionki DejaVuSans")
-                
+
                 pdfmetrics.registerFont(TTFont('DejaVuSans', font_path))
                 self.font_name = 'DejaVuSans'
             except TTFError:
@@ -74,6 +65,24 @@ class PDFReportGenerator:
             textColor=colors.blue,
             underline=True
         ))
+
+    @staticmethod
+    def _znajdz_czcionke() -> Optional[str]:
+        """Zwraca ścieżkę do DejaVuSans.ttf (obsługuje polskie znaki) albo None.
+
+        Kolejność: czcionka z projektu, czcionka systemu Windows, a na końcu kopia
+        dołączona do matplotlib, która jest dostępna wszędzie tam, gdzie działa aplikacja.
+        """
+        kandydaci = [
+            os.path.join(os.path.dirname(__file__), 'fonts', 'DejaVuSans.ttf'),
+            'C:/Windows/Fonts/DejaVuSans.ttf',
+            os.path.join(matplotlib.get_data_path(), 'fonts', 'ttf', 'DejaVuSans.ttf'),
+        ]
+        for sciezka in kandydaci:
+            # pliki mniejsze niż 10 KB to atrapy, a nie prawdziwa czcionka
+            if os.path.isfile(sciezka) and os.path.getsize(sciezka) > 10_000:
+                return sciezka
+        return None
 
     def _create_custom_styles(self):
         """Tworzy niestandardowe style dla dokumentu z obsługą polskich znaków."""
