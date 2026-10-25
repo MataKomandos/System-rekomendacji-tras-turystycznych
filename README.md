@@ -1,5 +1,12 @@
 # Rekomendator tras turystycznych
 
+**Polski** | [English](README.en.md)
+
+![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)
+![ReportLab](https://img.shields.io/badge/ReportLab-PDF-c0392b)
+![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-HTML%20parsing-4B8BBE)
+![pytest](https://img.shields.io/badge/pytest-10%20test%C3%B3w-0A9EDC?logo=pytest&logoColor=white)
+
 Aplikacja konsolowa, która podpowiada trasy piesze na wybrany dzień. Wybierasz zakres temperatur, długość i trudność trasy oraz region, a program porównuje je z prognozą pogody, ocenia każdą trasę i zapisuje raport PDF z wykresami.
 
 ## Jak to działa
@@ -8,6 +15,17 @@ Aplikacja konsolowa, która podpowiada trasy piesze na wybrany dzień. Wybierasz
 2. Odrzuca trasy, które nie mieszczą się w limitach długości i trudności.
 3. Dla każdej pozostałej trasy liczy dopasowanie do pogody w jej regionie (temperatura, opady, zachmurzenie) oraz dopasowanie samej trasy (trudność i długość), a następnie łączy je wagami.
 4. Zapisuje raport PDF do katalogu `raporty/`.
+
+```mermaid
+flowchart LR
+    U[/"preferencje: temperatura, długość, trudność, region"/] --> F
+    T[("trasy.csv<br/>15 tras, 10 regionów")] --> F["filtr: długość i trudność"]
+    W[("pogoda.csv")] --> S
+    F --> S["ocena: dopasowanie trasy + pogody"]
+    H[("route_reviews/*.html")] --> R["analiza recenzji: TextBlob"]
+    R --> P
+    S --> P[["raport PDF: ReportLab"]]
+```
 
 Wszystkie dane pochodzą z plików w repozytorium, więc program nie potrzebuje internetu.
 
