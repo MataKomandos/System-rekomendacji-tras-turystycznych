@@ -4,7 +4,7 @@ Aplikacja konsolowa, która podpowiada trasy piesze na wybrany dzień. Wybierasz
 
 ## Jak to działa
 
-1. Wczytuje trasy z `data/trasy/trasy.csv` (15 tras w 12 regionach) i dane pogodowe z `data/pogoda/pogoda.csv`.
+1. Wczytuje trasy z `data/trasy/trasy.csv` (15 tras w 10 regionach) i dane pogodowe z `data/pogoda/pogoda.csv`.
 2. Odrzuca trasy, które nie mieszczą się w limitach długości i trudności.
 3. Dla każdej pozostałej trasy liczy dopasowanie do pogody w jej regionie (temperatura, opady, zachmurzenie) oraz dopasowanie samej trasy (trudność i długość), a następnie łączy je wagami.
 4. Zapisuje raport PDF do katalogu `raporty/`.
